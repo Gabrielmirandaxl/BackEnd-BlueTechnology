@@ -29,9 +29,9 @@ namespace crud.Services
       return await this.context.Users.ToListAsync();
     }
 
-    public Task<UserModel> GetOneUser(int id)
+    public async Task<UserModel> GetOneUser(int id)
     {
-      throw new NotImplementedException();
+      return await this.context.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
     }
 
     public void UpdateUser(UserModel userModel)

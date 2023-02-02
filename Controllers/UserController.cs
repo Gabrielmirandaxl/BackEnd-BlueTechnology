@@ -41,5 +41,18 @@ namespace crud.Controllers
       return Ok(await this.services.GetAllUser());
     }
 
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetOne(int id)
+    {
+
+      var user = await this.services.GetOneUser(id);
+
+      return user != null
+      ? Ok(user)
+      : NotFound("Usuário não encontrado");
+    }
+
+
+
   }
 }
