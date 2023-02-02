@@ -52,6 +52,22 @@ namespace crud.Controllers
       : NotFound("Usuário não encontrado");
     }
 
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+
+      var user = await this.services.GetOneUser(id);
+
+      if (user == null) return NotFound("Usuário não encontrado");
+
+      this.services.DeleteUser(user);
+
+      return await this.services.SaveChangesAsync()
+      ? Ok("Usuário removido com sucesso")
+      : BadRequest("Erro ao remover o usuário");
+
+    }
+
 
 
   }

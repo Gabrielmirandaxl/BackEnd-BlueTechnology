@@ -21,7 +21,7 @@ namespace crud.Services
 
     public void DeleteUser(UserModel userModel)
     {
-      throw new NotImplementedException();
+      this.context.Remove(userModel);
     }
 
     public async Task<IEnumerable<UserModel>> GetAllUser()
