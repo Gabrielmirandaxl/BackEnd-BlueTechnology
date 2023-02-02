@@ -34,7 +34,12 @@ namespace crud.Controllers
 
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Get()
+    {
 
+      return Ok(await this.services.GetAllUser());
+    }
 
   }
 }
