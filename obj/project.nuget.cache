@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "n+jrUTs79K0U530gO5stwc7rAr0BKS8CMEHYL62SbQ8qc+eOXtm3Jz/Q3zM9bZovygKGyI/lmzSClQeYr7LK+w==",
+  "dgSpecHash": "BkJyFvXIw4pIreJ6MTL6bltGPewd2cCyUSF0sTQ6N3XmB7d4U8EBcEpUKVCgeeP1cIJCuahfX0fgPPyjd2jo9A==",
   "success": true,
-  "projectFilePath": "c:\\Users\\gabri\\Documents\\.net\\crud\\crud.csproj",
+  "projectFilePath": "C:\\Users\\gabri\\Documents\\.net\\crud\\crud.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gabri\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\gabri\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
