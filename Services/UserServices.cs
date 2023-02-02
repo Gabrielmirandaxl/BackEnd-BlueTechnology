@@ -1,12 +1,22 @@
+using crud.Data;
 using crud.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace crud.Services
 {
   public class UserServices : IUserServices
   {
+
+    private readonly UserContext context;
+
+    public UserServices(UserContext context)
+    {
+      this.context = context;
+    }
+
     public void CreateUser(UserModel userModel)
     {
-      throw new NotImplementedException();
+      this.context.Add(userModel);
     }
 
     public void DeleteUser(UserModel userModel)
@@ -14,9 +24,9 @@ namespace crud.Services
       throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<UserModel>> GetAllUser()
+    public async Task<IEnumerable<UserModel>> GetAllUser()
     {
-      throw new NotImplementedException();
+      return await this.context.Users.ToListAsync();
     }
 
     public Task<UserModel> GetOneUser(int id)
@@ -28,5 +38,12 @@ namespace crud.Services
     {
       throw new NotImplementedException();
     }
+
+    public async Task<bool> SaveChangesAsync()
+    {
+      return await this.context.SaveChangesAsync() > 0;
+    }
+
+
   }
 }

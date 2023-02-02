@@ -14,5 +14,7 @@ namespace crud.Services
     void UpdateUser(UserModel userModel);
 
     void DeleteUser(UserModel userModel);
+
+    Task<bool> SaveChangesAsync();
   }
 }
