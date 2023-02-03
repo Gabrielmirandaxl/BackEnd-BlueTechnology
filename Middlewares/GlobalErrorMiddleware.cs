@@ -31,9 +31,12 @@ namespace crud.Middlewares
     {
 
       var response = JsonSerializer.Serialize(new { ex.Message });
+
       httpContext.Response.ContentType = "application/json";
       httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+
       return httpContext.Response.WriteAsync(response);
+
 
     }
 
