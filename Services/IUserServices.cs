@@ -1,11 +1,12 @@
 
+using crud.Dtos;
 using crud.Model;
 
 namespace crud.Services
 {
   public interface IUserServices
   {
-    Task<IEnumerable<UserModel>> GetAllUser();
+    Task<IEnumerable<UserDto>> GetAllUser();
 
     Task<UserModel> GetOneUser(int id);
 

@@ -1,4 +1,6 @@
 
+using AutoMapper;
+using crud.Dtos;
 using crud.Model;
 using crud.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -14,9 +16,12 @@ namespace crud.Controllers
 
     private readonly IUserServices services;
 
-    public UserController(IUserServices services)
+    private readonly IMapper mapper;
+
+    public UserController(IUserServices services, IMapper mapper)
     {
       this.services = services;
+      this.mapper = mapper;
     }
 
     [HttpPost]
@@ -44,11 +49,13 @@ namespace crud.Controllers
     [HttpGet("{id}")]
     public async Task<IActionResult> GetOne(int id)
     {
-
       var user = await this.services.GetOneUser(id);
 
+
+      var userDetails = this.mapper.Map<UserDetailsDto>(user);
+
       return user != null
-      ? Ok(user)
+      ? Ok(userDetails)
       : NotFound("Usuário não encontrado");
     }
 

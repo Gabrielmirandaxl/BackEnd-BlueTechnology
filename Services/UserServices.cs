@@ -1,4 +1,6 @@
+using System.Security.Cryptography.X509Certificates;
 using crud.Data;
+using crud.Dtos;
 using crud.Libs;
 using crud.Model;
 using Microsoft.EntityFrameworkCore;
@@ -23,9 +25,11 @@ namespace crud.Services
       this.context.Add(userModel);
     }
 
-    public async Task<IEnumerable<UserModel>> GetAllUser()
+    public async Task<IEnumerable<UserDto>> GetAllUser()
     {
-      return await this.context.Users.ToListAsync();
+      return await this.context.Users
+      .Select(x => new UserDto { Id = x.Id, Name = x.Name, Email = x.Email, Telefone = x.Telefone })
+      .ToListAsync();
     }
 
     public async Task<UserModel> GetOneUser(int id)
