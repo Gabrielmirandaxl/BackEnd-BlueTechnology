@@ -1,4 +1,5 @@
 using crud.Data;
+using crud.Libs;
 using crud.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,12 +17,10 @@ namespace crud.Services
 
     public void CreateUser(UserModel userModel)
     {
-      this.context.Add(userModel);
-    }
 
-    public void DeleteUser(UserModel userModel)
-    {
-      this.context.Remove(userModel);
+      ValidationUser.Validation(userModel);
+
+      this.context.Add(userModel);
     }
 
     public async Task<IEnumerable<UserModel>> GetAllUser()
@@ -36,7 +35,15 @@ namespace crud.Services
 
     public void UpdateUser(UserModel userModel)
     {
+
+      ValidationUser.Validation(userModel);
+
       this.context.Update(userModel);
+    }
+
+    public void DeleteUser(UserModel userModel)
+    {
+      this.context.Remove(userModel);
     }
 
     public async Task<bool> SaveChangesAsync()

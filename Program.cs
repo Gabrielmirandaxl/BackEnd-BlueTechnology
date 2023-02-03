@@ -1,4 +1,5 @@
 using crud.Data;
+using crud.Middlewares;
 using crud.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,7 +33,7 @@ if (app.Environment.IsDevelopment())
   app.UseSwaggerUI();
 }
 
-
+app.UseMiddleware(typeof(GlobalErrorMiddleware));
 
 app.UseHttpsRedirection();
 
