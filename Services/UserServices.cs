@@ -36,7 +36,7 @@ namespace crud.Services
 
     public void UpdateUser(UserModel userModel)
     {
-      throw new NotImplementedException();
+      this.context.Update(userModel);
     }
 
     public async Task<bool> SaveChangesAsync()

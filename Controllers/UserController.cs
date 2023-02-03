@@ -68,6 +68,28 @@ namespace crud.Controllers
 
     }
 
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Put(int id, UserModel userModel)
+    {
+
+      var user = await this.services.GetOneUser(id);
+
+      if (user == null) return NotFound("Usuário não encontrado");
+
+      user.Name = userModel.Name;
+      user.Email = userModel.Email;
+      user.Telefone = userModel.Telefone;
+      user.Cpf = userModel.Cpf;
+      user.UpdateRegistration = DateTime.Now;
+
+      this.services.UpdateUser(user);
+
+      return await this.services.SaveChangesAsync()
+      ? Ok("Usuário atualizado com sucesso")
+      : BadRequest("Erro ao atualizar o usuário");
+
+    }
+
 
 
   }
