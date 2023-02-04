@@ -8,6 +8,7 @@ namespace crud.Mappers
   {
     public UserMappers()
     {
+      CreateMap<UserModel, UserDto>();
       CreateMap<UserModel, UserDetailsDto>();
     }
   }

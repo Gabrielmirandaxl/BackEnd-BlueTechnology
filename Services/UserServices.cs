@@ -25,11 +25,9 @@ namespace crud.Services
       this.context.Add(userModel);
     }
 
-    public async Task<IEnumerable<UserDto>> GetAllUser()
+    public async Task<IEnumerable<UserModel>> GetAllUser()
     {
-      return await this.context.Users
-      .Select(x => new UserDto { Id = x.Id, Name = x.Name, Email = x.Email, Telefone = x.Telefone })
-      .ToListAsync();
+      return await this.context.Users.ToListAsync();
     }
 
     public async Task<UserModel> GetOneUser(int id)

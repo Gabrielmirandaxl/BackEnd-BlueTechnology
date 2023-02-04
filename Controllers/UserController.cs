@@ -43,7 +43,9 @@ namespace crud.Controllers
     public async Task<IActionResult> Get()
     {
 
-      return Ok(await this.services.GetAllUser());
+      var users = await this.services.GetAllUser();
+
+      return Ok(users.Select(user => this.mapper.Map<UserDto>(user)));
     }
 
     [HttpGet("{id}")]
