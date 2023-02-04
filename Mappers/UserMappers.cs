@@ -10,6 +10,7 @@ namespace crud.Mappers
     {
       CreateMap<UserModel, UserDto>();
       CreateMap<UserModel, UserDetailsDto>();
+      CreateMap<UserDetailsDto, UserModel>();
     }
   }
 }

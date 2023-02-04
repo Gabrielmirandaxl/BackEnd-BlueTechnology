@@ -25,13 +25,15 @@ namespace crud.Controllers
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post(UserModel userModel)
+    public async Task<IActionResult> Post(UserDetailsDto userDetailsDto)
     {
 
-      userModel.CreateRegistration = DateTime.Now;
-      userModel.UpdateRegistration = DateTime.Now;
+      userDetailsDto.CreateRegistration = DateTime.Now;
+      userDetailsDto.UpdateRegistration = DateTime.Now;
 
-      this.services.CreateUser(userModel);
+      var userCreate = this.mapper.Map<UserModel>(userDetailsDto);
+
+      this.services.CreateUser(userCreate);
 
       return await this.services.SaveChangesAsync()
       ? Ok("Usuário criado")
@@ -78,17 +80,19 @@ namespace crud.Controllers
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int id, UserModel userModel)
+    public async Task<IActionResult> Put(int id, UserDetailsDto userDetailsDto)
     {
 
       var user = await this.services.GetOneUser(id);
 
       if (user == null) return NotFound("Usuário não encontrado");
 
-      user.Name = userModel.Name;
-      user.Email = userModel.Email;
-      user.Telefone = userModel.Telefone;
-      user.Cpf = userModel.Cpf;
+      var userUpdate = this.mapper.Map<UserModel>(userDetailsDto);
+
+      user.Name = userUpdate.Name;
+      user.Email = userUpdate.Email;
+      user.Telefone = userUpdate.Telefone;
+      user.Cpf = userUpdate.Cpf;
       user.UpdateRegistration = DateTime.Now;
 
       this.services.UpdateUser(user);
