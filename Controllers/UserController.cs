@@ -1,4 +1,3 @@
-
 using AutoMapper;
 using crud.Dtos;
 using crud.Model;
@@ -36,7 +35,7 @@ namespace crud.Controllers
       this.services.CreateUser(userCreate);
 
       return await this.services.SaveChangesAsync()
-      ? Ok("Usuário criado")
+      ? Ok(userCreate)
       : BadRequest("Erro ao criar usuário");
 
     }
@@ -98,11 +97,24 @@ namespace crud.Controllers
       this.services.UpdateUser(user);
 
       return await this.services.SaveChangesAsync()
-      ? Ok("Usuário atualizado com sucesso")
+      ? Ok(user)
       : BadRequest("Erro ao atualizar o usuário");
 
     }
 
+    [HttpGet("/search")]
+    public async Task<IActionResult> Get([FromQuery] string email)
+    {
+
+      var user = await this.services.SearchOneUser(email);
+
+      var userDetails = this.mapper.Map<UserDetailsDto>(user);
+
+      return user == null
+      ? NotFound("Usuário não encontrado")
+      : Ok(userDetails);
+
+    }
 
 
   }

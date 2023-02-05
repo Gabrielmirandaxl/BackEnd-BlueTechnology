@@ -1,6 +1,5 @@
-using System.Security.Cryptography.X509Certificates;
+
 using crud.Data;
-using crud.Dtos;
 using crud.Libs;
 using crud.Model;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +32,14 @@ namespace crud.Services
     public async Task<UserModel> GetOneUser(int id)
     {
       return await this.context.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
+    }
+
+    public async Task<UserModel> SearchOneUser(string email)
+    {
+
+
+      return await this.context.Users.Where(x => x.Email == email).FirstOrDefaultAsync();
+
     }
 
     public void UpdateUser(UserModel userModel)

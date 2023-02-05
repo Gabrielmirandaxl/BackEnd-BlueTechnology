@@ -26,6 +26,8 @@ builder.Services.AddScoped<IUserServices, UserServices>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -36,6 +38,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware(typeof(GlobalErrorMiddleware));
+
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseHttpsRedirection();
 
