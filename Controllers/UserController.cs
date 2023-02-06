@@ -80,12 +80,14 @@ namespace crud.Controllers
     public async Task<IActionResult> Put(int id, UserDetailsDto userDetailsDto)
     {
 
+      var user = await this.services.GetOneUser(id);
+
       var userUpdate = this.mapper.Map<UserModel>(userDetailsDto);
 
-      this.services.UpdateUserAsync(id, userUpdate);
+      this.services.UpdateUser(id, userUpdate);
 
       return await this.repository.SavesChangesAsync()
-      ? Ok(await this.services.GetOneUser(id))
+      ? Ok(user)
       : BadRequest("Erro ao atualizar o usuário");
     }
 

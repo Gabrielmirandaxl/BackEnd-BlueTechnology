@@ -53,7 +53,7 @@ namespace crud.Services
       return await this.repository.SearchOneUser(email);
     }
 
-    public async void UpdateUserAsync(int id, UserModel userUpdate)
+    public async void UpdateUser(int id, UserModel userUpdate)
     {
 
       ValidationUser.Validation(userUpdate);
@@ -69,10 +69,10 @@ namespace crud.Services
       this.repository.UpdateUser(user);
     }
 
-    public void DeleteUser(int id, UserModel userModel)
+    public async void DeleteUser(int id, UserModel userModel)
     {
 
-      var user = this.repository.GetOneUser(id);
+      var user = await this.repository.GetOneUser(id);
 
       if (user == null) throw new ArgumentException("Usuário não encontrado");
 
