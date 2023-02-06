@@ -23,8 +23,8 @@ Venho por meio deste repositorio entregar a aplicação `back end`, CRUD feito c
 ## 📥 download
 
 Antes de começar, você precisará ter as seguintes ferramentas instaladas em sua máquina:
-[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/),  e [Java](https://www.java.com/pt-BR/).
-Além disso, é bom ter um editor para trabalhar com código como [VSCode](https://code.visualstudio.com/) e [Intellij](https://www.jetbrains.com/pt-br/idea/download/).
+[Git](https://git-scm.com).
+Além disso, é bom ter um editor para trabalhar com código como [VSCode](https://code.visualstudio.com/).
 
 ### 💻 setup
 
@@ -32,7 +32,7 @@ Além disso, é bom ter um editor para trabalhar com código como [VSCode](https
 # clonar este repositório
 $ git clone https://github.com/Gabrielmirandaxl/BackEnd-BlueTechnology
 
-# acesse a pasta do projeto no intellij
+# acesse a pasta do projeto 
 $ cd BackEnd-BlueTechnology
 
 # digite esse comando
