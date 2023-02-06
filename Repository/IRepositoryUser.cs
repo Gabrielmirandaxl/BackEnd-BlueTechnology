@@ -1,8 +1,8 @@
 using crud.Model;
 
-namespace crud.Services
+namespace crud.Repository
 {
-  public interface IUserServices
+  public interface IRepositoryUser
   {
     Task<IEnumerable<UserModel>> GetAllUser();
 
@@ -16,7 +16,6 @@ namespace crud.Services
 
     void DeleteUser(UserModel userModel);
 
-
-
+    Task<bool> SavesChangesAsync();
   }
 }

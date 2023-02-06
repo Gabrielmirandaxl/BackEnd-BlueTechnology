@@ -1,6 +1,7 @@
 using AutoMapper;
 using crud.Dtos;
 using crud.Model;
+using crud.Repository;
 using crud.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,13 +15,16 @@ namespace crud.Controllers
   {
 
     private readonly IUserServices services;
+    private readonly IRepositoryUser repository;
 
     private readonly IMapper mapper;
 
-    public UserController(IUserServices services, IMapper mapper)
+    public UserController(IUserServices services, IRepositoryUser repository, IMapper mapper)
     {
       this.services = services;
+      this.repository = repository;
       this.mapper = mapper;
+
     }
 
     [HttpPost]
@@ -30,11 +34,12 @@ namespace crud.Controllers
       userDetailsDto.CreateRegistration = DateTime.Now;
       userDetailsDto.UpdateRegistration = DateTime.Now;
 
+
       var userCreate = this.mapper.Map<UserModel>(userDetailsDto);
 
       this.services.CreateUser(userCreate);
 
-      return await this.services.SaveChangesAsync()
+      return await this.repository.SavesChangesAsync()
       ? Ok(userCreate)
       : BadRequest("Erro ao criar usuário");
 
@@ -52,7 +57,7 @@ namespace crud.Controllers
     [HttpGet("{id}")]
     public async Task<IActionResult> GetOne(int id)
     {
-      var user = await this.services.GetOneUser(id);
+      var user = await this.repository.GetOneUser(id);
 
 
       var userDetails = this.mapper.Map<UserDetailsDto>(user);
@@ -66,13 +71,13 @@ namespace crud.Controllers
     public async Task<IActionResult> Delete(int id)
     {
 
-      var user = await this.services.GetOneUser(id);
+      var user = await this.repository.GetOneUser(id);
 
       if (user == null) return NotFound("Usuário não encontrado");
 
       this.services.DeleteUser(user);
 
-      return await this.services.SaveChangesAsync()
+      return await this.repository.SavesChangesAsync()
       ? Ok("Usuário removido com sucesso")
       : BadRequest("Erro ao remover o usuário");
 
@@ -96,7 +101,7 @@ namespace crud.Controllers
 
       this.services.UpdateUser(user);
 
-      return await this.services.SaveChangesAsync()
+      return await this.repository.SavesChangesAsync()
       ? Ok(user)
       : BadRequest("Erro ao atualizar o usuário");
 
@@ -106,13 +111,11 @@ namespace crud.Controllers
     public async Task<IActionResult> Get([FromQuery] string email)
     {
 
-      var user = await this.services.SearchOneUser(email);
+      var user = await this.repository.SearchOneUser(email);
 
       var userDetails = this.mapper.Map<UserDetailsDto>(user);
 
-      return user == null
-      ? NotFound("Usuário não encontrado")
-      : Ok(userDetails);
+      return Ok(userDetails);
 
     }
 

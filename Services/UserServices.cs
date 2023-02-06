@@ -1,19 +1,17 @@
-
-using crud.Data;
 using crud.Libs;
 using crud.Model;
-using Microsoft.EntityFrameworkCore;
+using crud.Repository;
 
 namespace crud.Services
 {
   public class UserServices : IUserServices
   {
 
-    private readonly UserContext context;
+    private readonly IRepositoryUser repository;
 
-    public UserServices(UserContext context)
+    public UserServices(IRepositoryUser repository)
     {
-      this.context = context;
+      this.repository = repository;
     }
 
     public void CreateUser(UserModel userModel)
@@ -21,24 +19,23 @@ namespace crud.Services
 
       ValidationUser.Validation(userModel);
 
-      this.context.Add(userModel);
+      this.repository.CreateUser(userModel);
     }
 
     public async Task<IEnumerable<UserModel>> GetAllUser()
     {
-      return await this.context.Users.ToListAsync();
+      return await this.repository.GetAllUser();
     }
 
-    public async Task<UserModel> GetOneUser(int id)
+    public Task<UserModel> GetOneUser(int id)
     {
-      return await this.context.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
+      throw new NotImplementedException();
+
     }
 
-    public async Task<UserModel> SearchOneUser(string email)
+    public Task<UserModel> SearchOneUser(string email)
     {
-
-
-      return await this.context.Users.Where(x => x.Email == email).FirstOrDefaultAsync();
+      throw new NotImplementedException();
 
     }
 
@@ -47,17 +44,12 @@ namespace crud.Services
 
       ValidationUser.Validation(userModel);
 
-      this.context.Update(userModel);
+      this.repository.UpdateUser(userModel);
     }
 
     public void DeleteUser(UserModel userModel)
     {
-      this.context.Remove(userModel);
-    }
-
-    public async Task<bool> SaveChangesAsync()
-    {
-      return await this.context.SaveChangesAsync() > 0;
+      this.repository.DeleteUser(userModel);
     }
 
 
