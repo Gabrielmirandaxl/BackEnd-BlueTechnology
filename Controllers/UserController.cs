@@ -10,7 +10,6 @@ namespace crud.Controllers
 
   [ApiController]
   [Route("api/[controller]")]
-
   public class UserController : ControllerBase
   {
 
@@ -31,6 +30,7 @@ namespace crud.Controllers
     public async Task<IActionResult> Post(UserDetailsDto userDetailsDto)
     {
 
+      userDetailsDto.CreateRegistration = DateTime.Now;
 
       var userCreate = this.mapper.Map<UserModel>(userDetailsDto);
 
@@ -56,7 +56,6 @@ namespace crud.Controllers
     {
       var user = await this.services.GetOneUser(id);
 
-
       var userDetails = this.mapper.Map<UserDetailsDto>(user);
 
       return user != null
@@ -81,14 +80,12 @@ namespace crud.Controllers
     public async Task<IActionResult> Put(int id, UserDetailsDto userDetailsDto)
     {
 
-      var user = await this.services.GetOneUser(id);
-
       var userUpdate = this.mapper.Map<UserModel>(userDetailsDto);
 
-      this.services.UpdateUser(id, userUpdate);
+      this.services.UpdateUserAsync(id, userUpdate);
 
       return await this.repository.SavesChangesAsync()
-      ? Ok(user)
+      ? Ok(await this.services.GetOneUser(id))
       : BadRequest("Erro ao atualizar o usuário");
     }
 

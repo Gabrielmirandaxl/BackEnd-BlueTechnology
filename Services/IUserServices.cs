@@ -8,7 +8,7 @@ namespace crud.Services
     Task<UserModel> GetOneUser(int id);
     Task<UserModel> SearchOneUser(string email);
     void CreateUser(UserModel userModel);
-    void UpdateUser(int id, UserModel userModel);
+    void UpdateUserAsync(int id, UserModel userModel);
     void DeleteUser(int id, UserModel userModel);
   }
 }

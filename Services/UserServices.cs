@@ -2,7 +2,6 @@ using crud.Data;
 using crud.Libs;
 using crud.Model;
 using crud.Repository;
-using Microsoft.EntityFrameworkCore;
 
 namespace crud.Services
 {
@@ -19,13 +18,12 @@ namespace crud.Services
       this.context = context;
     }
 
-    public async void CreateUser(UserModel userModel)
+    public void CreateUser(UserModel userModel)
     {
-
       ValidationUser.Validation(userModel);
 
       userModel.CreateRegistration = DateTime.Now;
-      userModel.UpdateRegistration = DateTime.Now;
+
 
       this.repository.CreateUser(userModel);
     }
@@ -55,12 +53,12 @@ namespace crud.Services
       return await this.repository.SearchOneUser(email);
     }
 
-    public async void UpdateUser(int id, UserModel userUpdate)
+    public async void UpdateUserAsync(int id, UserModel userUpdate)
     {
 
       ValidationUser.Validation(userUpdate);
 
-      var user = await this.GetOneUser(id);
+      var user = await this.repository.GetOneUser(id);
 
       user.Name = userUpdate.Name;
       user.Email = userUpdate.Email;
@@ -80,7 +78,6 @@ namespace crud.Services
 
       this.repository.DeleteUser(userModel);
     }
-
 
   }
 }
