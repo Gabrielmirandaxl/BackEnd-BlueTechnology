@@ -30,11 +30,13 @@ Além disso, é bom ter um editor para trabalhar com código como [VSCode](https
 
 ```php
 # clonar este repositório
-$ git clone https://github.com/Gabrielmirandaxl/challenge-Bluetechnology
+$ git clone https://github.com/Gabrielmirandaxl/BackEnd-BlueTechnology
 
 # acesse a pasta do projeto no intellij
+$ cd BackEnd-BlueTechnology
 
-# inicie a aplicação
+# digite esse comando
+$ dotnet build
 
 ```
 
@@ -42,11 +44,15 @@ $ git clone https://github.com/Gabrielmirandaxl/challenge-Bluetechnology
 ```php
 
 # aplicação rodando em:
-  - Local:   http://localhost:3000/ 
+  - Local:   http://localhost:3500/ 
 ```
 
 
 <br>
+
+# Swagger(documentação da api)
+<img width="900" heigth="900"  src="https://github.com/Gabrielmirandaxl/gif/blob/main/swagger.PNG">
+
 
 ## 🌐 aplicação
 <img width="900" heigth="900"  src="https://github.com/Gabrielmirandaxl/gif/blob/main/2023-01-14%2021-46-26.gif">
@@ -60,10 +66,10 @@ As seguintes ferramentas/tecnologias foram usadas na construção e teste do pro
 
 | logo               | Framework                  | Version      |
 | :----------------- | :------------------------- | :----------: |
-| <img align="center" alt="vue" height="30" width="40" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Java-Dark.svg">| Java  |  `18.0.0`       |
-| <img align="center" alt="vue" height="30" width="40" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Spring-Dark.svg">| Spring boot  |  `3.0.1`       |
+| <img align="center" alt="vue" height="30" width="40" src="https://github.com/tandpfun/skill-icons/blob/main/icons/CS.svg">| c#  |  `18.0.0`       |
+| <img align="center" alt="vue" height="30" width="40" src="https://github.com/tandpfun/skill-icons/blob/main/icons/DotNet.svg">| .net  |  `6.0.0`       |
 | <img align="center" alt="js" height="30" width="40" src="https://github.com/tandpfun/skill-icons/blob/main/icons/MySQL-Dark.svg"> | Mysql |  `8.0.29`      |
-| <img align="center" alt="node" height="30" width="40" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Docker.svg"> | Docker      |  `20.10.21`       |
+    
 
 
               
