@@ -16,10 +16,6 @@ namespace crud.Libs
       if (userModel.Telefone.Length != 14) throw new ArgumentException("Preencha corretamente o campo telefone");
       if (string.IsNullOrWhiteSpace(userModel.Cpf)) throw new ArgumentException("Preencha o campo cpf");
       if (userModel.Cpf.Length != 14) throw new ArgumentException("Preencha o campo cpf corretamente");
-
-
-
-
     }
 
   }

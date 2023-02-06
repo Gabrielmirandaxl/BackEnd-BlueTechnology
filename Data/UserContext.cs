@@ -26,9 +26,6 @@ namespace crud.Data
       user.Property(x => x.Cpf).HasColumnName("cpf").IsRequired();
       user.Property(x => x.CreateRegistration).HasColumnName("createRegistration");
       user.Property(x => x.UpdateRegistration).HasColumnName("updateRegistration");
-
-
     }
-
   }
 }

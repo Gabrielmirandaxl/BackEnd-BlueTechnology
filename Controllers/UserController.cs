@@ -31,9 +31,6 @@ namespace crud.Controllers
     public async Task<IActionResult> Post(UserDetailsDto userDetailsDto)
     {
 
-      userDetailsDto.CreateRegistration = DateTime.Now;
-      userDetailsDto.UpdateRegistration = DateTime.Now;
-
 
       var userCreate = this.mapper.Map<UserModel>(userDetailsDto);
 
@@ -42,7 +39,6 @@ namespace crud.Controllers
       return await this.repository.SavesChangesAsync()
       ? Ok(userCreate)
       : BadRequest("Erro ao criar usuário");
-
     }
 
     [HttpGet]
@@ -53,6 +49,7 @@ namespace crud.Controllers
 
       return Ok(users.Select(user => this.mapper.Map<UserDto>(user)));
     }
+
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetOne(int id)
@@ -73,12 +70,11 @@ namespace crud.Controllers
 
       var user = await this.services.GetOneUser(id);
 
-      this.services.DeleteUser(user);
+      this.services.DeleteUser(id, user);
 
       return await this.repository.SavesChangesAsync()
       ? Ok("Usuário removido com sucesso")
       : BadRequest("Erro ao remover o usuário");
-
     }
 
     [HttpPut("{id}")]
@@ -94,7 +90,6 @@ namespace crud.Controllers
       return await this.repository.SavesChangesAsync()
       ? Ok(user)
       : BadRequest("Erro ao atualizar o usuário");
-
     }
 
     [HttpGet("/search")]
@@ -106,7 +101,6 @@ namespace crud.Controllers
       var userDetails = this.mapper.Map<UserDetailsDto>(user);
 
       return Ok(userDetails);
-
     }
 
 

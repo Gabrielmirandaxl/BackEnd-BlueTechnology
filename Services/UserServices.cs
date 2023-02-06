@@ -24,6 +24,8 @@ namespace crud.Services
 
       ValidationUser.Validation(userModel);
 
+      userModel.CreateRegistration = DateTime.Now;
+      userModel.UpdateRegistration = DateTime.Now;
 
       this.repository.CreateUser(userModel);
     }
@@ -36,23 +38,21 @@ namespace crud.Services
     public async Task<UserModel> GetOneUser(int id)
     {
 
-      var user = await this.context.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
+      var user = await this.repository.GetOneUser(id);
 
       if (user == null) throw new ArgumentException("Usuário não encontrado");
 
       return await this.repository.GetOneUser(id);
-
     }
 
     public async Task<UserModel> SearchOneUser(string email)
     {
 
-      var user = await this.context.Users.Where(x => x.Email == email).FirstOrDefaultAsync();
+      var user = await this.repository.SearchOneUser(email);
 
       if (user == null) throw new ArgumentException("Usuário não encontrado");
 
       return await this.repository.SearchOneUser(email);
-
     }
 
     public async void UpdateUser(int id, UserModel userUpdate)
@@ -71,8 +71,13 @@ namespace crud.Services
       this.repository.UpdateUser(user);
     }
 
-    public void DeleteUser(UserModel userModel)
+    public void DeleteUser(int id, UserModel userModel)
     {
+
+      var user = this.repository.GetOneUser(id);
+
+      if (user == null) throw new ArgumentException("Usuário não encontrado");
+
       this.repository.DeleteUser(userModel);
     }
 
