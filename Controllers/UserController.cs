@@ -57,7 +57,7 @@ namespace crud.Controllers
     [HttpGet("{id}")]
     public async Task<IActionResult> GetOne(int id)
     {
-      var user = await this.repository.GetOneUser(id);
+      var user = await this.services.GetOneUser(id);
 
 
       var userDetails = this.mapper.Map<UserDetailsDto>(user);
@@ -71,9 +71,7 @@ namespace crud.Controllers
     public async Task<IActionResult> Delete(int id)
     {
 
-      var user = await this.repository.GetOneUser(id);
-
-      if (user == null) return NotFound("Usuário não encontrado");
+      var user = await this.services.GetOneUser(id);
 
       this.services.DeleteUser(user);
 
@@ -88,8 +86,6 @@ namespace crud.Controllers
     {
 
       var user = await this.services.GetOneUser(id);
-
-      if (user == null) return NotFound("Usuário não encontrado");
 
       var userUpdate = this.mapper.Map<UserModel>(userDetailsDto);
 
@@ -111,7 +107,7 @@ namespace crud.Controllers
     public async Task<IActionResult> Get([FromQuery] string email)
     {
 
-      var user = await this.repository.SearchOneUser(email);
+      var user = await this.services.SearchOneUser(email);
 
       var userDetails = this.mapper.Map<UserDetailsDto>(user);
 

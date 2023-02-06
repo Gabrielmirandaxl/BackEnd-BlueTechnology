@@ -1,6 +1,8 @@
+using crud.Data;
 using crud.Libs;
 using crud.Model;
 using crud.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace crud.Services
 {
@@ -9,9 +11,12 @@ namespace crud.Services
 
     private readonly IRepositoryUser repository;
 
-    public UserServices(IRepositoryUser repository)
+    private readonly UserContext context;
+
+    public UserServices(IRepositoryUser repository, UserContext context)
     {
       this.repository = repository;
+      this.context = context;
     }
 
     public void CreateUser(UserModel userModel)
@@ -27,15 +32,25 @@ namespace crud.Services
       return await this.repository.GetAllUser();
     }
 
-    public Task<UserModel> GetOneUser(int id)
+    public async Task<UserModel> GetOneUser(int id)
     {
-      throw new NotImplementedException();
+
+      var user = await this.context.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
+
+      if (user == null) throw new ArgumentException("Usuário não encontrado");
+
+      return await this.repository.GetOneUser(id);
 
     }
 
-    public Task<UserModel> SearchOneUser(string email)
+    public async Task<UserModel> SearchOneUser(string email)
     {
-      throw new NotImplementedException();
+
+      var user = await this.context.Users.Where(x => x.Email == email).FirstOrDefaultAsync();
+
+      if (user == null) throw new ArgumentException("Usuário não encontrado");
+
+      return await this.repository.SearchOneUser(email);
 
     }
 

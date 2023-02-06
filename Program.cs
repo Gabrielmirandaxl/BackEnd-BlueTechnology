@@ -1,5 +1,6 @@
 using crud.Data;
 using crud.Middlewares;
+using crud.Repository;
 using crud.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,7 @@ builder.Services.AddDbContext<UserContext>(options =>
 });
 
 builder.Services.AddScoped<IUserServices, UserServices>();
+builder.Services.AddScoped<IRepositoryUser, RepositoryUser>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
