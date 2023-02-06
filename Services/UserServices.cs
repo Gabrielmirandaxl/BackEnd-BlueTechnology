@@ -19,10 +19,11 @@ namespace crud.Services
       this.context = context;
     }
 
-    public void CreateUser(UserModel userModel)
+    public async void CreateUser(UserModel userModel)
     {
 
       ValidationUser.Validation(userModel);
+
 
       this.repository.CreateUser(userModel);
     }
@@ -54,12 +55,20 @@ namespace crud.Services
 
     }
 
-    public void UpdateUser(UserModel userModel)
+    public async void UpdateUser(int id, UserModel userUpdate)
     {
 
-      ValidationUser.Validation(userModel);
+      ValidationUser.Validation(userUpdate);
 
-      this.repository.UpdateUser(userModel);
+      var user = await this.GetOneUser(id);
+
+      user.Name = userUpdate.Name;
+      user.Email = userUpdate.Email;
+      user.Telefone = userUpdate.Telefone;
+      user.Cpf = userUpdate.Cpf;
+      user.UpdateRegistration = DateTime.Now;
+
+      this.repository.UpdateUser(user);
     }
 
     public void DeleteUser(UserModel userModel)

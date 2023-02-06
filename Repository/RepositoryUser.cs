@@ -22,7 +22,7 @@ namespace crud.Repository
 
     public void DeleteUser(UserModel userModel)
     {
-      throw new NotImplementedException();
+      this.context.Remove(userModel);
     }
 
     public async Task<IEnumerable<UserModel>> GetAllUser()
@@ -35,10 +35,6 @@ namespace crud.Repository
       return await this.context.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
     }
 
-    public async Task<bool> SaveChangesAsync()
-    {
-      throw new NotImplementedException();
-    }
 
     public async Task<UserModel> SearchOneUser(string email)
     {

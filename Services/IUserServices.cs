@@ -12,7 +12,7 @@ namespace crud.Services
 
     void CreateUser(UserModel userModel);
 
-    void UpdateUser(UserModel userModel);
+    void UpdateUser(int id, UserModel userModel);
 
     void DeleteUser(UserModel userModel);
 

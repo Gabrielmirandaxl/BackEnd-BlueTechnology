@@ -89,13 +89,7 @@ namespace crud.Controllers
 
       var userUpdate = this.mapper.Map<UserModel>(userDetailsDto);
 
-      user.Name = userUpdate.Name;
-      user.Email = userUpdate.Email;
-      user.Telefone = userUpdate.Telefone;
-      user.Cpf = userUpdate.Cpf;
-      user.UpdateRegistration = DateTime.Now;
-
-      this.services.UpdateUser(user);
+      this.services.UpdateUser(id, userUpdate);
 
       return await this.repository.SavesChangesAsync()
       ? Ok(user)
